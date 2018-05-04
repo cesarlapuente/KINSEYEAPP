@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Raycast : MonoBehaviour {
-
+    RaycastHit hitInfo;
 	// Use this for initialization
 	void Start () {
         Debug.Log("start");
@@ -11,8 +11,11 @@ public class Raycast : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Physics.Raycast(transform.position, Vector3.forward)){
-            Debug.Log("je suis rentré en colision avec quelque chose lolilol");
+       
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo,  Mathf.Infinity)){
+           
+            Destroy(hitInfo.collider);       
+            Debug.Log("Meurs satanas");
         }
 	}
 }
