@@ -18,7 +18,7 @@ public class Balls : MonoBehaviour {
 
 
         if(Time.time > _nextTime ){
-            Debug.Log("BOUM");
+            Debug.Log("ball instantiate : " + Time.time);
             
             float x = Random.Range(-2, 3);
             float y = Random.Range(4, 7);
@@ -27,7 +27,10 @@ public class Balls : MonoBehaviour {
             /*
             Instantiate(_balls, _newVector, transform.rotation);
             */
+            // to do : instantiate the ball with camera position 
 
+
+            
             GameObject projectile = Instantiate(_balls, _newVector, Quaternion.identity) as GameObject;
             projectile.GetComponent<Rigidbody>().AddForce( new Vector3(0,0.5f,1) * 500);
 
