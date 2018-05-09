@@ -13,7 +13,7 @@ public class Raycast : MonoBehaviour {
 	void Update () {
        
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo,  Mathf.Infinity)){
-            Destroy(hitInfo.collider.gameObject);       
+          //  Destroy(hitInfo.collider.gameObject);       
             Debug.Log("Dead");
         }
 	}
