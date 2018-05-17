@@ -14,20 +14,21 @@ public class GyroController : MonoBehaviour
     private Vector3 _newVector;
     private float _nextTime = 2f;
 
-    [Range (-280f, 280)]
+    [Range (-50, 50)]
     public float ax;
 
-    [Range(-280f, 280)]
+    [Range(-50, 50)]
     public float by;
 
-    [Range(-280f, 280)]
+    [Range(-50, 50)]
     public float cz;
+
 
 
 
     private void Start()
     {
-        Physics.gravity = new Vector3(ax, -7.71f, -10.76f);
+        Physics.gravity = new Vector3(0, 0, 90);
 
         cameraContainer = new GameObject("Camera Container");
         cameraContainer.transform.position = transform.position;
@@ -39,6 +40,9 @@ public class GyroController : MonoBehaviour
 
 
     private bool EnableGyro(){
+       
+
+
         if(SystemInfo.supportsGyroscope)
         {
             gyro = Input.gyro;
@@ -59,74 +63,57 @@ public class GyroController : MonoBehaviour
 
     private void Update()
     {
-        ///////////////pour test sur pc ///////////////////
+
+
         if (Time.time > _nextTime)
         {
-            //Debug.Log("ball instantiate : " + Time.time);
-
-         
-            //Instantiate(_balls, _newVector, transform.rotation);
-
             // to do : instantiate the ball with camera position 
-
-
 
             float x = Random.Range(-2, 3);
             float y = Random.Range(-7, 7);
             float z = Random.Range(15, 25);
-            _newVector = new Vector3(0, -7, -20);//0,-4,20
+            _newVector = new Vector3(0, 1, -5);//0,-4,20
 
             GameObject projectile = Instantiate(_balls, _newVector, Quaternion.identity) as GameObject;
-            projectile.GetComponent<Rigidbody>().AddForce(0,0,0.5f, ForceMode.Impulse);
+
+
+            projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 200);
+
+            // ball.GetComponent<Rigidbody>().AddForce(Vector3.right * 200);
+
             //if ball don't destroy in 15 secondes, destroy it
-            _nextTime = Time.time + 2f;
+            _nextTime = Time.time + 1f;
+
+
+
+
         }
-
-
-
-
-            if (Time.time > _nextTime)
-        {
-            Debug.Log("ball instantiate : " + Time.time);
-
-           
-
-           // Instantiate(_balls, _newVector, transform.rotation);
-
-            // to do : instantiate the ball with camera position 
-
-
-
-            float x = Random.Range(-2, 3);
-            float y = Random.Range(4, 7);
-            float z = Random.Range(-5, 0);
-            _newVector = new Vector3(0, -4, 10);
-
-            GameObject projectile = Instantiate(_balls, _newVector, Quaternion.identity) as GameObject;
-            projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0.5f, 1) * 250);
-            Physics.gravity = new Vector3(0, 180, 0);
-            
-            _nextTime = Time.time + 2f;
-        }
-
-        //////////////////////
-
+        
         if(gyroEnabled){
             transform.localRotation = gyro.attitude * rot;
 
             if (Time.time > _nextTime)
             {
-                Debug.Log("ball instantiate : " + Time.time);
+                // to do : instantiate the ball with camera position 
 
                 float x = Random.Range(-2, 3);
-                float y = Random.Range(4, 7);
-                float z = Random.Range(-5, 0);
-                _newVector = new Vector3(0, -7, -20);//0,-4,20
+                float y = Random.Range(-7, 7);
+                float z = Random.Range(15, 25);
+                _newVector = new Vector3(0, 1, -5);//0,-4,20
 
                 GameObject projectile = Instantiate(_balls, _newVector, Quaternion.identity) as GameObject;
-                projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0.5f, 1) * 1);
+
+              
+                projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 200);
+
+                // ball.GetComponent<Rigidbody>().AddForce(Vector3.right * 200);
+
                 //if ball don't destroy in 15 secondes, destroy it
-                _nextTime = Time.time + 2f;
+                _nextTime = Time.time + 1f;
+
+
+
+
             }
 
 
