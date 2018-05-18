@@ -64,7 +64,16 @@ public class GyroController : MonoBehaviour
     private void Update()
     {
 
+        Instantiateballs();
+        if(gyroEnabled){
+            transform.localRotation = gyro.attitude * rot;
+        }
+    }
 
+
+
+    public void Instantiateballs()
+    {
         if (Time.time > _nextTime)
         {
             // to do : instantiate the ball with camera position 
@@ -88,37 +97,7 @@ public class GyroController : MonoBehaviour
 
 
         }
-        
-        if(gyroEnabled){
-            transform.localRotation = gyro.attitude * rot;
 
-            if (Time.time > _nextTime)
-            {
-                // to do : instantiate the ball with camera position 
-
-                float x = Random.Range(-2, 3);
-                float y = Random.Range(-7, 7);
-                float z = Random.Range(15, 25);
-                _newVector = new Vector3(0, 1, -5);//0,-4,20
-
-                GameObject projectile = Instantiate(_balls, _newVector, Quaternion.identity) as GameObject;
-
-              
-                projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 200);
-
-                // ball.GetComponent<Rigidbody>().AddForce(Vector3.right * 200);
-
-                //if ball don't destroy in 15 secondes, destroy it
-                _nextTime = Time.time + 1f;
-
-
-
-
-            }
-
-
-
-        }
     }
 
 
