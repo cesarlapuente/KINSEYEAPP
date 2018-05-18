@@ -78,15 +78,15 @@ public class GyroController : MonoBehaviour
         {
             // to do : instantiate the ball with camera position 
 
-            float x = Random.Range(-2, 3);
-            float y = Random.Range(-7, 7);
-            float z = Random.Range(15, 25);
+            float x = Random.Range(-5, 5);//0
+            float y = Random.Range(-4, 6);//1 ou -100 maybeÒ
+            float z = Random.Range(-10, 25);//-5
             _newVector = new Vector3(0, 1, -5);//0,-4,20
 
             GameObject projectile = Instantiate(_balls, _newVector, Quaternion.identity) as GameObject;
 
 
-            projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 200);
+            projectile.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) *200);//200
 
             // ball.GetComponent<Rigidbody>().AddForce(Vector3.right * 200);
 
