@@ -9,9 +9,6 @@ public class Balls : MonoBehaviour {
     private float _nextTime = 2f;
 
 
-
-
-
 	// Use this for initialization
 	void Start () {
         //Time.time;
@@ -32,9 +29,6 @@ public class Balls : MonoBehaviour {
             Instantiate(_balls, _newVector, transform.rotation);
             */
             // to do : instantiate the ball with camera position 
-
-
-
             float x = Random.Range(-2, 3);
             float y = Random.Range(4, 7);
             float z = Random.Range(0, 5);
