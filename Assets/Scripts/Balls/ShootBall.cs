@@ -6,6 +6,8 @@ public class ShootBall : MonoBehaviour
 {
     RaycastHit hitInfo;
     public int _nbBallsDead = 0;
+
+
     public delegate void BallsEvent(); //function contener, defini un type like int or hamebobjet
 
     public static event BallsEvent OnVictory;
@@ -13,13 +15,13 @@ public class ShootBall : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("start");
+      
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-
+        //Debug.Log("balls : " + _nbBallsDead);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, Mathf.Infinity))
         {
             Destroy(hitInfo.collider.gameObject);

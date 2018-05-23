@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 363229478}
   - component: {fileID: 363229477}
   - component: {fileID: 363229476}
-  - component: {fileID: 363229482}
+  - component: {fileID: 363229481}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -582,7 +582,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &363229482
+--- !u!114 &363229481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -619,7 +619,7 @@ RectTransform:
   m_GameObject: {fileID: 430952030}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 97738129}
   m_RootOrder: 2
@@ -1126,7 +1126,7 @@ MonoBehaviour:
   _textEnd: {fileID: 430952032}
   _slider: {fileID: 1336556530}
   _btnTryAgain: {fileID: 1874944390}
-  _shootBall: {fileID: 0}
+  _shootBall: {fileID: 363229481}
 --- !u!1 &1336556528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,7 +1160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 39, y: -80}
+  m_AnchoredPosition: {x: 39, y: -115}
   m_SizeDelta: {x: 171, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336556530
