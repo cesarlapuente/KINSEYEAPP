@@ -13,14 +13,11 @@ public class Timer : MonoBehaviour
     public Slider _slider;
     public Button _btnTryAgain;
     public ShootBall _shootBall;
-    public bool _endTime = false;
 
-
-    bool Won = false;
-
-
+    bool _Won = false;
     public delegate void EndTimer();
     public static event EndTimer OnEndTime;
+    public static event EndTimer OnStartTime;
 
     private void Start()
     {
@@ -29,7 +26,7 @@ public class Timer : MonoBehaviour
 
     private void GameWon()
     {
-        Won = true;
+        _Won = true;
     }
 
     // Update is called once per frame
@@ -43,19 +40,16 @@ public class Timer : MonoBehaviour
         else
         {
             End();
-            Debug.Log(Won);
-            if (Won)
+            if (_Won)
             {
                 _textEnd.gameObject.SetActive(true);
-                _textEnd.text = "G A G N É ! \n"  + _shootBall._nbBallsDead + " points";
+                _textEnd.text = "G A G N É ! \n" + _shootBall._nbBallsDead + " points";
                 _textEnd.color = Color.green;
-
-
             }
-            else if (!Won)
+            else if (!_Won)
             {
                 _textEnd.gameObject.SetActive(true);
-                _textEnd.text = " P E R D U ! \n"+ _shootBall._nbBallsDead + " points";
+                _textEnd.text = " P E R D U ! \n" + _shootBall._nbBallsDead + " points";
                 _textEnd.color = Color.red;
             }
 
@@ -65,16 +59,20 @@ public class Timer : MonoBehaviour
 
 
     public void Restart()
-    { 
-        _endTime = false; 
-        _shootBall._nbBallsDead = 0;//a verif
+    {
+
+        //set values
+        _slider.value = 1;
+        _Won = false;
+        _shootBall._nbBallsDead = 0;
+        _shootBall._EndTime = false;
+
+        //visible or not
         _cible.gameObject.SetActive(true);
         _textEnd.gameObject.SetActive(false);
         _btnTryAgain.gameObject.SetActive(false);
-        _slider.value = 1;
-        Won = false;
 
-      
+        CheckStartTime();
     }
 
 
@@ -82,15 +80,27 @@ public class Timer : MonoBehaviour
     {
         _cible.gameObject.SetActive(false);
         _btnTryAgain.gameObject.SetActive(true);
-        _endTime = true;
         CheckEndTime();
 
     }
-    public void CheckEndTime(){
 
-        if(OnEndTime != null)
+
+
+    public void CheckEndTime()
+    {
+
+        if (OnEndTime != null)
         {
             OnEndTime();
+        }
+    }
+
+
+    public void CheckStartTime()
+    {
+        if (OnStartTime != null)
+        {
+            OnStartTime();
         }
     }
 }

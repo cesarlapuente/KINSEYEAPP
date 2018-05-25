@@ -10,16 +10,26 @@ public class Score : MonoBehaviour {
 	void Start () {
 
         ShootBall.OnScore += ScoreGame;
-        Timer.OnEndTime += RestartScore;
+        Timer.OnEndTime += DeactivateScore;
+        Timer.OnStartTime += ActivateScore;
 	}
-
 
     private void ScoreGame(int _score)
     {
+       
         _textScrore.text = _score.ToString();
     }
 	
-    private void RestartScore(){
+
+    public void DeactivateScore()
+    {
+        _textScrore.gameObject.SetActive(false);
+    }
+
+
+    public void ActivateScore()
+    {
         _textScrore.text = "0";
+        _textScrore.gameObject.SetActive(true);
     }
 }
