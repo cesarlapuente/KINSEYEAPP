@@ -13,12 +13,17 @@ public class Timer : MonoBehaviour
     public Slider _slider;
     public Button _btnTryAgain;
     public ShootBall _shootBall;
- 
+    public bool _endTime = false;
+
+
     bool Won = false;
+
+
+    public delegate void EndTimer();
+    public static event EndTimer OnEndTime;
 
     private void Start()
     {
-       // _shootBall.GetComponent(sho);
         ShootBall.OnVictory += GameWon; // on s'abonne
     }
 
@@ -38,7 +43,7 @@ public class Timer : MonoBehaviour
         else
         {
             End();
-
+            Debug.Log(Won);
             if (Won)
             {
                 _textEnd.gameObject.SetActive(true);
@@ -60,14 +65,16 @@ public class Timer : MonoBehaviour
 
 
     public void Restart()
-    {
+    { 
+        _endTime = false; 
         _shootBall._nbBallsDead = 0;//a verif
         _cible.gameObject.SetActive(true);
         _textEnd.gameObject.SetActive(false);
         _btnTryAgain.gameObject.SetActive(false);
         _slider.value = 1;
+        Won = false;
 
-
+      
     }
 
 
@@ -75,6 +82,15 @@ public class Timer : MonoBehaviour
     {
         _cible.gameObject.SetActive(false);
         _btnTryAgain.gameObject.SetActive(true);
-       
+        _endTime = true;
+        CheckEndTime();
+
+    }
+    public void CheckEndTime(){
+
+        if(OnEndTime != null)
+        {
+            OnEndTime();
+        }
     }
 }
