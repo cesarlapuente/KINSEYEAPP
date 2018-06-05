@@ -1,0 +1,60 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Gyro : MonoBehaviour {
+
+    private bool gyroEnabled;
+    private Gyroscope gyro;
+    private GameObject cameraContainer;
+    private Quaternion rot;
+
+    private void Awake()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+    }
+
+    // Use this for initialization
+    void Start () {
+        
+        //Physics.gravity = new Vector3(0, -90,0);
+
+
+        cameraContainer = new GameObject("Camera Container");
+        cameraContainer.transform.position = transform.position;
+        transform.SetParent(cameraContainer.transform);
+
+        gyroEnabled = EnableGyro();
+	}
+	
+	
+
+    private bool EnableGyro()
+    {
+
+        if (SystemInfo.supportsGyroscope)
+        {
+            gyro = Input.gyro;
+            gyro.enabled = true;
+            cameraContainer.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
+            rot = new Quaternion(0, 0, 1, 0);
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+
+    private void Update()
+    {
+        if (gyroEnabled)
+        {
+            transform.localRotation = gyro.attitude * rot;
+        }
+    }
+
+}
