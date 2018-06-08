@@ -8,13 +8,43 @@ public class Loose : MonoBehaviour {
     public BalanceGame _balanceGame;// script balanceGame
     public Fall _fall;//script fallingdown
 
-    void OnTriggerEnter(Collider other){
-        _gyro.gameObject.SetActive(false);
-        Debug.Log("apres desactiavtion du gyro");
-        _balanceGame.enabled = false;
-        Debug.Log("apres desactivation de ballgame");
-        _fall.enabled = true;
+    //trigger 1 = left
+    //trigger 2 = right
+    public delegate void TriggerEvent(int _NumTrigger);
+    public static event TriggerEvent OnTriggerLoose;
 
-        Debug.Log("apres activation de fall");
+
+    void OnTriggerEnter(Collider other)
+    {
+      //  Debug.Log("apres desactivation de ballgame");
+        _fall.enabled = true;
+       // _gyro.gameObject.SetActive(false);
+       // Debug.Log("apres desactiavtion du gyro");
+        _balanceGame.enabled = false;
+        //desactive le timer, descativer se script si le timer fini avant
+
+        Debug.Log("mon nom " + transform.gameObject.tag);
+
+        if (other.transform.gameObject.tag.Equals("L"))
+        {
+            Debug.Log("dans le left losse" );
+            if (OnTriggerLoose != null)
+            {
+                Debug.Log("dan le on trigger1l");
+                OnTriggerLoose(1);
+            }
+
+        }
+        if (other.transform.gameObject.tag.Equals("R")) 
+        {
+            Debug.Log("dans le right losse");
+            if (OnTriggerLoose != null)
+            {
+                Debug.Log("dan le on trigger2r");
+                OnTriggerLoose(2);
+            }
+        }
+
+       // Debug.Log("apres activation de fall");
     }
 }
