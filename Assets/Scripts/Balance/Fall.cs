@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Fall : MonoBehaviour
 {
-    public int _TheTriggerNumber;
+    public int _TheTriggerNumber = 0;
     // Use this for initialization
     void Start()
     {
-        Loose.OnTriggerLoose += NumberT;
+     //   Loose.OnTriggerLoose += NumberT;
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log("dans fall");
-        FallInDown();
+        FallInDown(_TheTriggerNumber);
     }
 
 
-    public void FallInDown()
+    public void FallInDown(int numb)
     {
+        _TheTriggerNumber = numb;
         Rigidbody _rb = transform.GetComponent<Rigidbody>();
         _rb.isKinematic = true;
         _rb.useGravity = false;

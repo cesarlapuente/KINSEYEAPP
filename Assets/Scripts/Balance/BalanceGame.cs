@@ -7,16 +7,20 @@ public class BalanceGame : MonoBehaviour {
     public Text _debugtexte;
     public Text _debugtest;
     public Transform _target;
+    public Vector3 _posDepart;
+    public Quaternion _rotDepart;
 
 	// Use this for initialization
 	void Start () {
-		
+        _posDepart = transform.position;
+
+        BalanceTimer.OnStartTime += Init;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log("dans balance game");
+        //Debug.Log("dans balance game");
         TurnWithGyro();
         //transform.eulerAngles(Mathf.Clamp(transform.eulerAngles.z, -90, 90));
         //_debugtexte.text = zRot.ToString();
@@ -32,17 +36,10 @@ public class BalanceGame : MonoBehaviour {
     public void TurnWithGyro(){
         // permet de balance sur un axe la plaque avec le gyroscope
         float zRot = Input.gyro.rotationRate.z;
-        transform.Rotate(Vector3.forward, zRot * Time.deltaTime * 950);
+        transform.Rotate(Vector3.forward, zRot * Time.deltaTime * 1000);//950
 
     }
  
-       
- 
-
-
-
-
-
 
     void ClampAngle(float angle)
     {
@@ -62,8 +59,17 @@ public class BalanceGame : MonoBehaviour {
         return Mathf.Min(angle, to);*/
     }
 
-    void fall()
+    void Fall()
     {
         Physics.gravity = Input.gyro.gravity;
     }
+
+
+    public void Init()
+    {
+        //Debug.Log("dans le init");
+        transform.position = _posDepart;
+        transform.rotation = _rotDepart;
+    }
+
 }

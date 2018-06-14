@@ -12,7 +12,8 @@ public class BalanceTimer : MonoBehaviour
     public Text _textEnd;
     public Slider _slider;
     public Button _btnTryAgain;
-
+    public BalanceGame _balanceGame;
+    public Fall _fall;
 
     bool _Won = true;
     public delegate void EndTimer();
@@ -24,16 +25,16 @@ public class BalanceTimer : MonoBehaviour
         Loose.OnTriggerLoose += GameWon;
     }
 
-    private void GameWon(int i)
+    private void GameWon()
     {
         _Won = false;
-        Debug.Log(_Won + "est la valeur de won");
+       // Debug.Log(_Won + "est la valeur de won");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_Won + "est la valeur de won dans l'update");
+        //Debug.Log(_Won + "est la valeur de won dans l'update");
         if (_slider.value > 0 && _Won==true)
         {
             _slider.value = _slider.value - 0.0009f;
@@ -44,6 +45,7 @@ public class BalanceTimer : MonoBehaviour
             End();
             if (_Won)
             {
+                _balanceGame.enabled = false;
                 _textEnd.gameObject.SetActive(true);
                 _textEnd.text = "G A G N É ! ";
                 _textEnd.color = Color.green;
@@ -65,9 +67,11 @@ public class BalanceTimer : MonoBehaviour
 
         //set values
         _slider.value = 1;
-        _Won = false;
-      
+        _Won =true;
+
         //visible or not
+        _balanceGame.enabled = true;
+        _fall.enabled = false;
    
         _textEnd.gameObject.SetActive(false);
         _btnTryAgain.gameObject.SetActive(false);
