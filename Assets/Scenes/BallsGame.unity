@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nbBallsDead: 0
-  _endTimer: {fileID: 1314396879}
+  _EndTime: 0
 --- !u!1 &430952030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1216,6 @@ MonoBehaviour:
   _slider: {fileID: 1336556530}
   _btnTryAgain: {fileID: 1874944390}
   _shootBall: {fileID: 363229481}
-  _endTime: 0
 --- !u!1 &1336556528
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,25 +14,27 @@ public class BalanceTimer : MonoBehaviour
     public Button _btnTryAgain;
 
 
-    bool _Won = false;
+    bool _Won = true;
     public delegate void EndTimer();
     public static event EndTimer OnEndTime;
     public static event EndTimer OnStartTime;
 
     private void Start()
     {
-        ShootBall.OnVictory += GameWon; // on s'abonne
+        Loose.OnTriggerLoose += GameWon;
     }
 
-    private void GameWon()
+    private void GameWon(int i)
     {
-        _Won = true;
+        _Won = false;
+        Debug.Log(_Won + "est la valeur de won");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_slider.value > 0)//......pertinant?
+        Debug.Log(_Won + "est la valeur de won dans l'update");
+        if (_slider.value > 0 && _Won==true)
         {
             _slider.value = _slider.value - 0.0009f;
 
@@ -65,8 +67,6 @@ public class BalanceTimer : MonoBehaviour
         _slider.value = 1;
         _Won = false;
       
-        //_shootBall._EndTime = false;
-
         //visible or not
    
         _textEnd.gameObject.SetActive(false);
